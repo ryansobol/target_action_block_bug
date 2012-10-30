@@ -17,7 +17,7 @@ class TestViewController < UIViewController
     super
 
     navigationItem.rightBarButtonItem = UIBarButtonItem.save do
-      puts "You'll never see this!"
+      puts "You'll will see this!"
     end
   end
 end
@@ -28,6 +28,8 @@ class UIBarButtonItem
     #
     # BubbleWrap uses a similar technique for UIControl.
     # See https://github.com/rubymotion/BubbleWrap/blob/master/motion/ui/ui_control.rb#L12
-    alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemSave, target:block, action:"call")
+    item = alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemSave, target:block, action:"call")
+    item.instance_variable_set(:@target, block)
+    item
   end
 end
